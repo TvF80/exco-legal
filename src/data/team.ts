@@ -59,5 +59,6 @@ export const team: TeamMember[] = [
     bio: 'Aplikant radcowski odbywający aplikację przy Okręgowej Izbie Radców Prawnych w Warszawie. Wspiera zespół w bieżącej obsłudze klientów, przygotowaniu dokumentacji korporacyjnej i sprawach sądowych.',
     specializations: ['Dokumentacja korporacyjna', 'Prawo spółek', 'Wsparcie procesowe'],
     email: 'natalia.wesolowska@exco-legal.pl',
+    // brak zdjęcia — wyświetli się avatar z inicjałami
   },
 ]

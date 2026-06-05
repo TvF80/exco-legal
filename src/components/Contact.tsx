@@ -161,7 +161,7 @@ export default function Contact() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative' }}>
         {/* Section header */}
         <div className="mb-16 text-center">
           <motion.div

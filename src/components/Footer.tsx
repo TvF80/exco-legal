@@ -59,7 +59,7 @@ export default function Footer() {
       </div>
 
       {/* Main footer content */}
-      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-20">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 1.5rem 5rem', position: 'relative' }}>
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
           {/* COL 1 — Brand */}
           <div>
@@ -268,7 +268,7 @@ export default function Footer() {
         className="relative border-t"
         style={{ borderColor: "rgba(248,245,238,0.07)" }}
       >
-        <div className="mx-auto max-w-7xl px-6 py-5 lg:px-12">
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '1.25rem 1.5rem' }}>
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p
               className="text-center text-xs leading-relaxed sm:text-left"

@@ -21,9 +21,10 @@ const cardVariants = {
 
 /* ─── Avatar ──────────────────────────────────────────────────────────────── */
 
-function Avatar({ member }: { member: TeamMember }) {
+function Avatar({ member, size = '7rem' }: { member: TeamMember; size?: string }) {
   const initials = member.name
     .split(' ')
+    .filter(Boolean)
     .map((n) => n[0])
     .slice(0, 2)
     .join('')
@@ -32,18 +33,24 @@ function Avatar({ member }: { member: TeamMember }) {
     return (
       <div
         style={{
-          width: '5rem',
-          height: '5rem',
+          width: size,
+          height: size,
           borderRadius: '50%',
           overflow: 'hidden',
-          border: '2px solid rgba(201,168,76,0.5)',
+          border: '2.5px solid rgba(201,168,76,0.55)',
           flexShrink: 0,
+          boxShadow: '0 0 0 4px rgba(201,168,76,0.1)',
         }}
       >
         <img
           src={member.photo}
           alt={member.name}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'top center',
+          }}
         />
       </div>
     )
@@ -52,11 +59,12 @@ function Avatar({ member }: { member: TeamMember }) {
   return (
     <div
       style={{
-        width: '5rem',
-        height: '5rem',
+        width: size,
+        height: size,
         borderRadius: '50%',
-        background: 'rgba(27,42,74,0.6)',
-        border: '2px solid rgba(201,168,76,0.45)',
+        background: 'linear-gradient(135deg, rgba(27,42,74,0.8) 0%, rgba(36,54,97,0.9) 100%)',
+        border: '2.5px solid rgba(201,168,76,0.45)',
+        boxShadow: '0 0 0 4px rgba(201,168,76,0.08)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -66,10 +74,11 @@ function Avatar({ member }: { member: TeamMember }) {
       <span
         style={{
           fontFamily: '"Playfair Display", Georgia, serif',
-          fontSize: '1.25rem',
+          fontSize: 'calc(' + size + ' * 0.35)',
           fontWeight: 600,
           color: '#C9A84C',
-          letterSpacing: '0.02em',
+          letterSpacing: '0.04em',
+          opacity: 0.9,
         }}
       >
         {initials}
@@ -114,7 +123,7 @@ function BoardCard({ member, index }: { member: TeamMember; index: number }) {
         }
       }}
     >
-      <Avatar member={member} />
+      <Avatar member={member} size="6rem" />
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
         <div>
@@ -240,7 +249,7 @@ function LegalCard({ member, index }: { member: TeamMember; index: number }) {
         }
       }}
     >
-      <Avatar member={member} />
+      <Avatar member={member} size="7rem" />
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', width: '100%' }}>
         <h3

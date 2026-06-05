@@ -76,7 +76,7 @@ export default function Navbar() {
       >
         <div
           className="mx-auto flex items-center justify-between px-6 lg:px-12"
-          style={{ maxWidth: '1280px', height: scrolled ? '64px' : '76px', transition: 'height 0.4s ease' }}
+          style={{ maxWidth: '1200px', height: scrolled ? '64px' : '76px', transition: 'height 0.4s ease' }}
         >
           {/* Logo */}
           <motion.a
