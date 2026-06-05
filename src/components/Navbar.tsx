@@ -87,43 +87,18 @@ export default function Navbar() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             onClick={() => setActiveLink('')}
           >
-            {/* Monogram emblem */}
-            <div
-              className="relative flex items-center justify-center flex-shrink-0"
-              style={{
-                width: 38,
-                height: 38,
-                border: '1.5px solid rgba(201,168,76,0.6)',
-                borderRadius: '2px',
-                transform: 'rotate(45deg)',
-                transition: 'border-color 0.3s ease',
-              }}
-            >
-              <Scale
-                size={16}
-                style={{
-                  color: '#C9A84C',
-                  transform: 'rotate(-45deg)',
-                  flexShrink: 0,
-                }}
-              />
-              {/* Corner accents */}
-              <span
-                style={{
-                  position: 'absolute',
-                  top: -3, left: -3,
-                  width: 5, height: 5,
-                  background: '#C9A84C',
-                  borderRadius: '50%',
-                }}
-              />
-            </div>
+            {/* Logo image */}
+            <img
+              src="/logo-legal.png"
+              alt="EXCO Poland Legal"
+              style={{ height: 36, width: 'auto', objectFit: 'contain', flexShrink: 0 }}
+            />
 
             <div className="flex flex-col leading-none">
               <span
-                className="font-serif"
                 style={{
-                  fontSize: '1.15rem',
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: '1.05rem',
                   fontWeight: 700,
                   color: '#C9A84C',
                   letterSpacing: '0.02em',

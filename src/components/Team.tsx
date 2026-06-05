@@ -11,18 +11,11 @@ const headerVariants = {
 }
 
 const cardVariants = {
-  hidden: (dir: 'left' | 'right') => ({
-    opacity: 0,
-    x: dir === 'left' ? -40 : 40,
-  }),
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.6,
-      delay: i * 0.12,
-      ease: "easeOut",
-    },
+    y: 0,
+    transition: { duration: 0.55, delay: i * 0.12, ease: 'easeOut' },
   }),
 }
 
@@ -212,15 +205,10 @@ function BoardCard({ member, index }: { member: TeamMember; index: number }) {
 /* ─── Legal team card (vertical) ─────────────────────────────────────────── */
 
 function LegalCard({ member, index }: { member: TeamMember; index: number }) {
-  const dir = index % 2 === 0 ? 'left' : 'right'
-
   return (
     <motion.article
-      custom={{ ...cardVariants.hidden(dir), i: index }}
-      variants={{
-        hidden: cardVariants.hidden(dir),
-        visible: cardVariants.visible(index),
-      }}
+      custom={index}
+      variants={cardVariants}
       whileHover={{ scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
       style={{

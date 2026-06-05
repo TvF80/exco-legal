@@ -19,6 +19,7 @@ export const team: TeamMember[] = [
     bio: 'Członek Zarządu EXCO A2A Polska — jednej z wiodących firm doradczych w Polsce, działającej w ramach globalnej sieci EXCO/Kreston obecnej w 108 krajach. Odpowiada za rozwój strategiczny grupy i współpracę z klientami zagranicznymi.',
     specializations: ['Strategia biznesowa', 'Obsługa klientów zagranicznych', 'Sieć EXCO International'],
     email: 'war@exco.pl',
+    photo: '/photos/raphael.jpg',
   },
   {
     id: 'laurent',
@@ -28,6 +29,7 @@ export const team: TeamMember[] = [
     bio: 'Członek Zarządu EXCO A2A Polska. Odpowiada za nadzór nad działalnością doradczą grupy oraz koordynację usług dla klientów korporacyjnych. Wieloletnie doświadczenie w zarządzaniu i doradztwie biznesowym.',
     specializations: ['Zarządzanie grupą', 'Doradztwo korporacyjne', 'Koordynacja usług'],
     email: 'war@exco.pl',
+    photo: '/photos/laurent.jpg',
   },
   {
     id: 'magdalena',
@@ -47,6 +49,7 @@ export const team: TeamMember[] = [
     bio: 'Radca prawny specjalizująca się w prawie pracy i obsłudze bieżącej przedsiębiorstw. Świadczy kompleksowe usługi z zakresu prawa zatrudnienia, sporządzania i analizy umów oraz reprezentacji przed sądem.',
     specializations: ['Prawo pracy', 'Umowy handlowe', 'Reprezentacja sądowa'],
     email: 'karolina.kanclerz@exco-legal.pl',
+    photo: '/photos/karolina.jpg',
   },
   {
     id: 'natalia',

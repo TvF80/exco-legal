@@ -10,7 +10,8 @@ import {
 } from 'lucide-react'
 import { services, type Service } from '../data/services'
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
+type LucideProps = { size?: number; strokeWidth?: number; color?: string }
+const iconMap: Record<string, React.ComponentType<LucideProps>> = {
   Building2,
   Briefcase,
   Archive,
@@ -95,7 +96,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           flexShrink: 0,
         }}
       >
-        <IconComponent size={20} strokeWidth={1.5} style={{ color: '#C9A84C' }} />
+        <IconComponent size={20} strokeWidth={1.5} color="#C9A84C" />
       </div>
 
       {/* Content */}
