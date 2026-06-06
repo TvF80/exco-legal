@@ -224,34 +224,36 @@ export default function Contact() {
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
                     variants={fadeUp}
-                    className="group flex items-start gap-5"
+                    style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}
                   >
-                    {/* Icon container */}
+                    {/* Icon container — fixed square, perfectly centered */}
                     <div
-                      className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors duration-200"
                       style={{
-                        backgroundColor: "rgba(201,168,76,0.12)",
-                        border: "1px solid rgba(201,168,76,0.25)",
+                        width: '2.75rem', height: '2.75rem', flexShrink: 0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        borderRadius: '4px',
+                        backgroundColor: 'rgba(201,168,76,0.12)',
+                        border: '1px solid rgba(201,168,76,0.28)',
                       }}
                     >
-                      <Icon
-                        size={18}
-                        style={{ color: "var(--color-gold)" }}
-                        strokeWidth={1.5}
-                      />
+                      <Icon size={17} color="var(--color-gold)" strokeWidth={1.5} />
                     </div>
 
-                    <div>
-                      <p
-                        className="mb-1 text-xs font-semibold uppercase tracking-widest"
-                        style={{ color: "var(--color-gold)", opacity: 0.7 }}
-                      >
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                      <p style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.6rem', fontWeight: 600,
+                        textTransform: 'uppercase', letterSpacing: '0.18em',
+                        color: 'var(--color-gold)', opacity: 0.7,
+                      }}>
                         {item.label}
                       </p>
-                      <p
-                        className="text-sm leading-relaxed whitespace-pre-line"
-                        style={{ color: "var(--color-cream)", opacity: 0.85 }}
-                      >
+                      <p style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.9rem', lineHeight: 1.55,
+                        whiteSpace: 'pre-line',
+                        color: 'var(--color-cream)', opacity: 0.85,
+                      }}>
                         {item.value}
                       </p>
                     </div>

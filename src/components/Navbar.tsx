@@ -87,40 +87,12 @@ export default function Navbar() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             onClick={() => setActiveLink('')}
           >
-            {/* Logo image */}
+            {/* Logo image only */}
             <img
               src="/logo-legal.png"
               alt="EXCO Poland Legal"
-              style={{ height: 36, width: 'auto', objectFit: 'contain', flexShrink: 0 }}
+              style={{ height: 40, width: 'auto', objectFit: 'contain', flexShrink: 0 }}
             />
-
-            <div className="flex flex-col leading-none">
-              <span
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: '1.05rem',
-                  fontWeight: 700,
-                  color: '#C9A84C',
-                  letterSpacing: '0.02em',
-                  lineHeight: 1.15,
-                  fontStyle: 'italic',
-                }}
-              >
-                EXCO Poland
-              </span>
-              <span
-                style={{
-                  fontSize: '0.62rem',
-                  color: 'rgba(248, 245, 238, 0.65)',
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
-                  fontWeight: 500,
-                  lineHeight: 1.4,
-                }}
-              >
-                Legal
-              </span>
-            </div>
           </motion.a>
 
           {/* Desktop nav */}
