@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView, Variants } from 'framer-motion';
 import { ArrowRight, Phone } from 'lucide-react';
+import { useLangContext } from '../LangContext';
+import { translations } from '../translations';
 
 // ─── Animation helpers ────────────────────────────────────────────────────────
 
@@ -33,13 +35,6 @@ const floatVariants: Variants = {
   },
 };
 
-// ─── Stats data ───────────────────────────────────────────────────────────────
-
-const STATS = [
-  { value: '25+', label: 'lat EXCO w Polsce', sublabel: 'Obecność od 1999' },
-  { value: '150+', label: 'specjalistów', sublabel: 'Radcowie i doradcy' },
-  { value: '108', label: 'krajów — sieć', sublabel: 'Globalny zasięg' },
-];
 
 // ─── SVG Background pattern ───────────────────────────────────────────────────
 
@@ -315,6 +310,13 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const controls = useAnimation();
+  const { lang } = useLangContext();
+  const t = translations[lang];
+  const STATS = [
+    { value: t.hero.stat1.val, label: t.hero.stat1.lbl },
+    { value: t.hero.stat2.val, label: t.hero.stat2.lbl },
+    { value: t.hero.stat3.val, label: t.hero.stat3.lbl },
+  ];
 
   useEffect(() => {
     if (isInView) controls.start('visible');
@@ -414,7 +416,7 @@ export default function Hero() {
                 fontWeight: 600,
               }}
             >
-              EXCO Poland Legal
+              {t.hero.eyebrow}
             </span>
           </motion.div>
 
@@ -434,7 +436,7 @@ export default function Hero() {
               margin: 0,
             }}
           >
-            Kompleksowe wsparcie prawne{' '}
+            {t.hero.h1}{' '}
             <span
               style={{
                 color: '#C9A84C',
@@ -442,7 +444,7 @@ export default function Hero() {
                 display: 'inline-block',
               }}
             >
-              dla Twojego biznesu
+              {t.hero.h1gold}
               {/* Underline flourish */}
               <motion.span
                 initial={{ scaleX: 0 }}
@@ -478,8 +480,7 @@ export default function Hero() {
               margin: 0,
             }}
           >
-            Kancelaria Radców Prawnych. Obsługujemy przedsiębiorców krajowych
-            i zagranicznych w zakresie prawa gospodarczego, korporacyjnego i pracy.
+            {t.hero.subtitle}
           </motion.p>
 
           {/* CTA buttons */}
@@ -512,7 +513,7 @@ export default function Hero() {
                 boxShadow: '0 4px 20px rgba(201,168,76,0.3)',
               }}
             >
-              Nasze usługi
+              {t.hero.btn1}
               <ArrowRight size={15} />
             </motion.a>
 
@@ -539,7 +540,7 @@ export default function Hero() {
               }}
             >
               <Phone size={14} />
-              Skontaktuj się
+              {t.hero.btn2}
             </motion.a>
           </motion.div>
 
@@ -596,16 +597,6 @@ export default function Hero() {
                   }}
                 >
                   {stat.label}
-                </p>
-                <p
-                  style={{
-                    fontSize: '0.62rem',
-                    color: 'rgba(248,245,238,0.35)',
-                    marginTop: '2px',
-                    letterSpacing: '0.04em',
-                  }}
-                >
-                  {stat.sublabel}
                 </p>
               </div>
             ))}
@@ -712,7 +703,7 @@ export default function Hero() {
             fontWeight: 500,
           }}
         >
-          Przewiń
+          {lang === 'fr' ? 'Défiler' : lang === 'es' ? 'Desplazar' : lang === 'en' ? 'Scroll' : 'Przewiń'}
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}

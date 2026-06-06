@@ -2,6 +2,8 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Mail } from 'lucide-react'
 import { team, type TeamMember } from '../data/team'
+import { useLangContext } from '../LangContext'
+import { translations } from '../translations'
 
 /* ─── Animation variants ──────────────────────────────────────────────────── */
 
@@ -89,7 +91,7 @@ function Avatar({ member, size = '7rem' }: { member: TeamMember; size?: string }
 
 /* ─── Board card (wide, horizontal) ──────────────────────────────────────── */
 
-function BoardCard({ member, index }: { member: TeamMember; index: number }) {
+function BoardCard({ member, index, emailLabel }: { member: TeamMember; index: number; emailLabel: string }) {
   return (
     <motion.article
       custom={index}
@@ -203,7 +205,7 @@ function BoardCard({ member, index }: { member: TeamMember; index: number }) {
             onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = 'rgba(201,168,76,0.7)')}
           >
             <Mail size={13} strokeWidth={1.75} />
-            E-mail
+            {emailLabel}
           </a>
         )}
       </div>
@@ -213,7 +215,7 @@ function BoardCard({ member, index }: { member: TeamMember; index: number }) {
 
 /* ─── Legal team card (vertical) ─────────────────────────────────────────── */
 
-function LegalCard({ member, index }: { member: TeamMember; index: number }) {
+function LegalCard({ member, index, emailLabel }: { member: TeamMember; index: number; emailLabel: string }) {
   return (
     <motion.article
       custom={index}
@@ -338,7 +340,7 @@ function LegalCard({ member, index }: { member: TeamMember; index: number }) {
           }}
         >
           <Mail size={12} strokeWidth={2} />
-          E-mail
+          {emailLabel}
         </a>
       )}
     </motion.article>
@@ -380,6 +382,8 @@ function GroupLabel({ children }: { children: React.ReactNode }) {
 export default function Team() {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
+  const { lang } = useLangContext()
+  const t = translations[lang]
 
   const boardMembers = team.filter((m) => m.role === 'board')
   const legalMembers = team.filter((m) => m.role !== 'board')
@@ -455,7 +459,7 @@ export default function Team() {
                 color: '#C9A84C',
               }}
             >
-              Ludzie
+              {t.team.eyebrow}
             </span>
           </div>
           <h2
@@ -468,7 +472,7 @@ export default function Team() {
               letterSpacing: '-0.01em',
             }}
           >
-            Nasz Zespół
+            {t.team.h2}
           </h2>
           <p
             style={{
@@ -479,7 +483,7 @@ export default function Team() {
               lineHeight: 1.7,
             }}
           >
-            Doświadczeni prawnicy i menedżerowie, których łączy wspólna misja — skuteczna obsługa przedsiębiorstw.
+            {t.team.subtitle}
           </p>
         </motion.div>
 
@@ -489,7 +493,7 @@ export default function Team() {
           animate={isInView ? 'visible' : 'hidden'}
           style={{ marginBottom: '3.5rem' }}
         >
-          <GroupLabel>Zarząd EXCO A2A Polska</GroupLabel>
+          <GroupLabel>{t.team.board}</GroupLabel>
           <div
             style={{
               display: 'grid',
@@ -499,7 +503,7 @@ export default function Team() {
             className="board-grid"
           >
             {boardMembers.map((member, i) => (
-              <BoardCard key={member.id} member={member} index={i} />
+              <BoardCard key={member.id} member={member} index={i} emailLabel={t.team.email} />
             ))}
           </div>
         </motion.div>
@@ -509,7 +513,7 @@ export default function Team() {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          <GroupLabel>Kancelaria Radców Prawnych</GroupLabel>
+          <GroupLabel>{t.team.legal}</GroupLabel>
           <div
             style={{
               display: 'grid',
@@ -519,7 +523,7 @@ export default function Team() {
             className="legal-grid"
           >
             {legalMembers.map((member, i) => (
-              <LegalCard key={member.id} member={member} index={i} />
+              <LegalCard key={member.id} member={member} index={i} emailLabel={t.team.email} />
             ))}
           </div>
         </motion.div>

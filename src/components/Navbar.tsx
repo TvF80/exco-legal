@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Scale } from 'lucide-react';
-
-const NAV_LINKS = [
-  { label: 'Usługi', href: '#services' },
-  { label: 'Zespół', href: '#team' },
-  { label: 'O Kancelarii', href: '#about' },
-  { label: 'Kontakt', href: '#contact' },
-];
+import { Menu, X } from 'lucide-react';
+import { useLangContext } from '../LangContext';
+import { translations } from '../translations';
+import LangSwitcher from './LangSwitcher';
 
 const drawerVariants = {
   closed: {
@@ -38,6 +34,15 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
+  const { lang, setLang } = useLangContext();
+  const t = translations[lang];
+
+  const NAV_LINKS = [
+    { label: t.nav.services, href: '#services' },
+    { label: t.nav.team, href: '#team' },
+    { label: t.nav.about, href: '#about' },
+    { label: t.nav.contact, href: '#contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -45,7 +50,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -87,7 +91,6 @@ export default function Navbar() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             onClick={() => setActiveLink('')}
           >
-            {/* Logo image only */}
             <img
               src="/logo-legal.png"
               alt="EXCO Poland Legal"
@@ -96,7 +99,7 @@ export default function Navbar() {
           </motion.a>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6">
             <motion.ul
               className="flex items-center gap-7 list-none"
               initial={{ opacity: 0, y: -10 }}
@@ -132,7 +135,6 @@ export default function Navbar() {
                     }}
                   >
                     {link.label}
-                    {/* Underline line */}
                     <span
                       style={{
                         position: 'absolute',
@@ -149,6 +151,15 @@ export default function Navbar() {
                 </li>
               ))}
             </motion.ul>
+
+            {/* Lang switcher */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            >
+              <LangSwitcher lang={lang} setLang={setLang} />
+            </motion.div>
 
             {/* CTA */}
             <motion.a
@@ -175,7 +186,6 @@ export default function Navbar() {
                 overflow: 'hidden',
               }}
             >
-              {/* Fill layer */}
               <motion.span
                 variants={{
                   hover: { scaleX: 1, originX: 0 },
@@ -193,7 +203,7 @@ export default function Navbar() {
                 variants={{ hover: { color: '#1B2A4A' } }}
                 style={{ position: 'relative', zIndex: 1, color: '#C9A84C', transition: 'color 0.35s ease' }}
               >
-                Umów konsultację
+                {t.nav.cta}
               </motion.span>
             </motion.a>
           </nav>
@@ -211,7 +221,7 @@ export default function Navbar() {
               color: '#C9A84C',
             }}
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? 'Zamknij menu' : 'Otwórz menu'}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -293,7 +303,6 @@ export default function Navbar() {
               ))}
             </svg>
 
-            {/* Gold accent line top */}
             <div
               style={{
                 position: 'absolute',
@@ -357,6 +366,16 @@ export default function Navbar() {
               ))}
             </motion.ul>
 
+            {/* Lang switcher — vertical in drawer */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.4 }}
+              style={{ marginTop: '2rem' }}
+            >
+              <LangSwitcher lang={lang} setLang={setLang} vertical />
+            </motion.div>
+
             {/* CTA in drawer */}
             <motion.div
               className="mt-auto"
@@ -380,7 +399,7 @@ export default function Navbar() {
                   borderRadius: '2px',
                 }}
               >
-                Umów konsultację
+                {t.nav.cta}
               </a>
               <p
                 style={{
@@ -391,7 +410,7 @@ export default function Navbar() {
                   textAlign: 'center',
                 }}
               >
-                EXCO Poland Legal © 2025
+                EXCO Poland Legal © {new Date().getFullYear()}
               </p>
             </motion.div>
           </motion.div>

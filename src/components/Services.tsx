@@ -4,6 +4,8 @@ import {
   Building2, Briefcase, Archive, FileText, Scale, Users, X, ChevronRight,
 } from 'lucide-react'
 import { services, type Service } from '../data/services'
+import { useLangContext } from '../LangContext'
+import { translations } from '../translations'
 
 type LucideProps = { size?: number; strokeWidth?: number; color?: string }
 const iconMap: Record<string, React.ComponentType<LucideProps>> = {
@@ -90,8 +92,15 @@ function ServiceCard({
   )
 }
 
-function ServiceExpanded({ service, onClose }: { service: Service; onClose: () => void }) {
+function ServiceExpanded({ service, onClose, lang }: { service: Service; onClose: () => void; lang: string }) {
   const IconComponent = iconMap[service.icon] ?? Building2
+  const expandedLabels: Record<string, { scope: string; description: string; includes: string; cta: string }> = {
+    pl: { scope: 'Zakres usług', description: 'Oferujemy kompleksową obsługę prawną w powyższym zakresie, dostosowaną do indywidualnych potrzeb każdego Klienta. Działamy szybko, skutecznie i z pełnym zaangażowaniem na każdym etapie współpracy.', includes: 'Co obejmuje usługa', cta: 'Skontaktuj się' },
+    en: { scope: 'Scope of services', description: 'We provide comprehensive legal support in the above areas, tailored to the individual needs of each Client. We act swiftly, effectively, and with full commitment at every stage of the engagement.', includes: 'What the service includes', cta: 'Get in touch' },
+    fr: { scope: 'Périmètre des services', description: 'Nous fournissons une assistance juridique complète dans les domaines susmentionnés, adaptée aux besoins individuels de chaque client. Nous agissons rapidement, efficacement et avec un engagement total à chaque étape.', includes: 'Ce que comprend le service', cta: 'Nous contacter' },
+    es: { scope: 'Alcance de servicios', description: 'Ofrecemos apoyo jurídico integral en los ámbitos anteriores, adaptado a las necesidades individuales de cada cliente. Actuamos con rapidez, eficacia y pleno compromiso en cada etapa de la colaboración.', includes: 'Qué incluye el servicio', cta: 'Contáctenos' },
+  }
+  const el = expandedLabels[lang] ?? expandedLabels['en']
 
   return (
     <motion.div
@@ -145,7 +154,7 @@ function ServiceExpanded({ service, onClose }: { service: Service; onClose: () =
             </div>
             <div>
               <p style={{ fontFamily: '"Inter"', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: '0.25rem' }}>
-                Zakres usług
+                {el.scope}
               </p>
               <h3 style={{
                 fontFamily: '"Playfair Display", Georgia, serif',
@@ -168,9 +177,7 @@ function ServiceExpanded({ service, onClose }: { service: Service; onClose: () =
             fontFamily: '"Inter"', fontSize: '0.9rem', color: 'rgba(248,245,238,0.55)',
             lineHeight: 1.75,
           }}>
-            Oferujemy kompleksową obsługę prawną w powyższym zakresie, dostosowaną
-            do indywidualnych potrzeb każdego Klienta. Działamy szybko, skutecznie
-            i z pełnym zaangażowaniem na każdym etapie współpracy.
+            {el.description}
           </p>
 
           <motion.a
@@ -187,7 +194,7 @@ function ServiceExpanded({ service, onClose }: { service: Service; onClose: () =
               boxShadow: '0 4px 20px rgba(201,168,76,0.25)',
             }}
           >
-            Skontaktuj się
+            {el.cta}
             <ChevronRight size={14} color="#1B2A4A" />
           </motion.a>
         </div>
@@ -200,7 +207,7 @@ function ServiceExpanded({ service, onClose }: { service: Service; onClose: () =
             marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
           }}>
             <span style={{ width: '1.5rem', height: '1px', background: '#C9A84C', display: 'inline-block' }} />
-            Co obejmuje usługa
+            {el.includes}
           </p>
           <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
             {service.items.map((item, i) => (
@@ -243,6 +250,8 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
   const [activeId, setActiveId] = useState<string | null>(null)
+  const { lang } = useLangContext()
+  const t = translations[lang]
 
   const activeService = services.find(s => s.id === activeId) ?? null
 
@@ -270,7 +279,7 @@ export default function Services() {
               fontFamily: '"Inter"', fontSize: '0.6875rem', fontWeight: 600,
               letterSpacing: '0.18em', textTransform: 'uppercase' as const, color: '#C9A84C',
             }}>
-              Zakres działalności
+              {t.services.eyebrow}
             </span>
           </div>
           <h2 style={{
@@ -278,13 +287,13 @@ export default function Services() {
             fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 700,
             color: '#1B2A4A', lineHeight: 1.2, letterSpacing: '-0.01em',
           }}>
-            Nasze usługi
+            {t.services.h2}
           </h2>
           <p style={{
             fontFamily: '"Inter"', fontSize: '0.9375rem', color: '#64748b',
             maxWidth: '520px', lineHeight: 1.7,
           }}>
-            Kompleksowa obsługa prawna dla przedsiębiorstw. Kliknij obszar, aby zobaczyć szczegóły.
+            {t.services.subtitle}
           </p>
         </motion.div>
 
@@ -312,6 +321,7 @@ export default function Services() {
               key={activeService.id}
               service={activeService}
               onClose={() => setActiveId(null)}
+              lang={lang}
             />
           )}
         </AnimatePresence>

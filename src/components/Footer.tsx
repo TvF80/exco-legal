@@ -1,17 +1,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail } from "lucide-react";
-
-const quickLinks = [
-  { label: "Usługi", href: "#services" },
-  { label: "Zespół", href: "#team" },
-  { label: "O Kancelarii", href: "#about" },
-  { label: "Kontakt", href: "#contact" },
-  {
-    label: "EXCO A2A Polska",
-    href: "https://exco.pl",
-    external: true,
-  },
-];
+import { useLangContext } from "../LangContext";
+import { translations } from "../translations";
 
 const companyInfo = [
   {
@@ -31,6 +21,16 @@ const companyInfo = [
 ];
 
 export default function Footer() {
+  const { lang } = useLangContext();
+  const t = translations[lang];
+
+  const quickLinks = [
+    { label: t.nav.services, href: "#services" },
+    { label: t.nav.team, href: "#team" },
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.contact, href: "#contact" },
+    { label: "EXCO A2A Polska", href: "https://exco.pl", external: true },
+  ];
   return (
     <footer
       style={{ backgroundColor: "var(--color-navy-dark, #111c33)" }}
@@ -101,8 +101,7 @@ export default function Footer() {
               className="mb-5 text-sm leading-relaxed"
               style={{ color: "var(--color-cream)", opacity: 0.55 }}
             >
-              Kancelaria radców prawnych oferująca kompleksowe wsparcie prawne
-              dla przedsiębiorców krajowych i zagranicznych.
+              {t.footer.desc}
             </p>
 
             {/* Network badge */}
@@ -121,18 +120,9 @@ export default function Footer() {
                 className="text-xs font-medium tracking-wide"
                 style={{ color: "var(--color-gold)" }}
               >
-                Część sieci EXCO International
+                {t.footer.network}
               </span>
             </div>
-
-            {/* Kreston note */}
-            <p
-              className="mt-4 text-xs leading-relaxed"
-              style={{ color: "var(--color-cream)", opacity: 0.35 }}
-            >
-              Należymy do Kreston International — globalnej sieci doradczej
-              obecnej w 108 krajach świata.
-            </p>
           </div>
 
           {/* COL 2 — Quick links */}
@@ -141,7 +131,7 @@ export default function Footer() {
               className="mb-6 text-xs font-semibold uppercase tracking-[0.2em]"
               style={{ color: "var(--color-gold)" }}
             >
-              Szybkie linki
+              {t.footer.links}
             </h4>
 
             <ul className="space-y-3">
@@ -198,7 +188,7 @@ export default function Footer() {
               className="mb-6 text-xs font-semibold uppercase tracking-[0.2em]"
               style={{ color: "var(--color-gold)" }}
             >
-              Dane kancelarii
+              {t.footer.legal}
             </h4>
 
             <div className="space-y-5">
@@ -274,8 +264,7 @@ export default function Footer() {
               className="text-center text-xs leading-relaxed sm:text-left"
               style={{ color: "var(--color-cream)", opacity: 0.35 }}
             >
-              © 2024 EXCO Poland Legal Vacher-Kielak. Wszelkie prawa
-              zastrzeżone.
+              {t.footer.copyright}
             </p>
 
             <div className="flex items-center gap-5">

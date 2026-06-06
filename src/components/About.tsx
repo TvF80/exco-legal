@@ -1,12 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-
-const stats = [
-  { icon: '🏛️', value: '25+ lat', label: 'EXCO w Polsce od 1999 roku' },
-  { icon: '🌍', value: '108 krajów', label: 'Sieć Kreston International' },
-  { icon: '👥', value: '150+', label: 'Specjalistów w grupie' },
-  { icon: '⚖️', value: 'Full-service', label: 'Od umów po sąd' },
-]
+import { useLangContext } from '../LangContext'
+import { translations } from '../translations'
 
 const item = {
   hidden: { opacity: 0, y: 24 },
@@ -27,6 +22,15 @@ const cardAnim = {
 export default function About() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { lang } = useLangContext()
+  const t = translations[lang]
+
+  const stats = [
+    { value: t.about.stat1.val, label: t.about.stat1.lbl },
+    { value: t.about.stat2.val, label: t.about.stat2.lbl },
+    { value: t.about.stat3.val, label: t.about.stat3.lbl },
+    { value: t.about.stat4.val, label: t.about.stat4.lbl },
+  ]
 
   return (
     <section
@@ -39,7 +43,6 @@ export default function About() {
         overflow: 'hidden',
       }}
     >
-      {/* Subtle background ornament */}
       <div
         aria-hidden
         style={{
@@ -86,7 +89,7 @@ export default function About() {
                 textTransform: 'uppercase',
                 color: '#C9A84C',
               }}>
-                O Kancelarii
+                {t.about.eyebrow}
               </span>
             </motion.div>
 
@@ -104,8 +107,8 @@ export default function About() {
                 letterSpacing: '-0.01em',
               }}
             >
-              Prawo. Precyzja.<br />
-              <span style={{ color: '#C9A84C' }}>Partnerstwo.</span>
+              {t.about.h2line1}<br />
+              <span style={{ color: '#C9A84C' }}>{t.about.h2gold}</span>
             </motion.h2>
 
             <motion.div
@@ -129,9 +132,7 @@ export default function About() {
                 opacity: 0.8,
               }}
             >
-              EXCO Poland Legal Vacher-Kielak to kancelaria radców prawnych oferująca kompleksowe
-              wsparcie prawne dopasowane do potrzeb Klientów. Obsługujemy zarówno przedsiębiorców
-              krajowych, jak i zagranicznych na każdym etapie prowadzenia działalności.
+              {t.about.p1}
             </motion.p>
 
             <motion.p
@@ -147,25 +148,7 @@ export default function About() {
                 opacity: 0.8,
               }}
             >
-              Działamy w ramach{' '}
-              <a
-                href="https://exco.pl"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: '#1B2A4A',
-                  fontWeight: 600,
-                  textDecoration: 'underline',
-                  textDecorationColor: '#C9A84C',
-                  textUnderlineOffset: '3px',
-                  textDecorationThickness: '2px',
-                }}
-              >
-                EXCO A2A Polska
-              </a>{' '}
-              — jednej z wiodących grup doradczych w Polsce, należącej do globalnej sieci
-              Kreston International obecnej w 108 krajach świata. To gwarancja wiedzy,
-              doświadczenia i standardów na najwyższym poziomie.
+              {t.about.p2}
             </motion.p>
 
             <motion.div
@@ -183,7 +166,7 @@ export default function About() {
                 color: '#1B2A4A',
                 opacity: 0.5,
               }}>
-                od 1999 roku
+                {t.about.since} 1999
               </span>
             </motion.div>
           </div>
@@ -213,7 +196,6 @@ export default function About() {
                   cursor: 'default',
                 }}
               >
-                {/* Gold top bar animates on hover */}
                 <motion.div
                   style={{
                     position: 'absolute', top: 0, left: 0,
@@ -223,16 +205,14 @@ export default function About() {
                   whileHover={{ width: '100%' }}
                   transition={{ duration: 0.3 }}
                 />
-                <span style={{ fontSize: '2rem', display: 'block', marginBottom: '0.75rem', lineHeight: 1 }}>
-                  {stat.icon}
-                </span>
                 <p style={{
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '1.375rem',
-                  fontWeight: 700,
-                  color: '#1B2A4A',
-                  lineHeight: 1.1,
+                  fontSize: '1.75rem',
+                  fontWeight: 800,
+                  color: '#C9A84C',
+                  lineHeight: 1,
                   marginBottom: '0.375rem',
+                  letterSpacing: '-0.02em',
                 }}>
                   {stat.value}
                 </p>
